@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  app:
+    image: 'image-app'
+    build:
+      context: C:\Users\Asus\HW21\docker-hw21\src\main\java\com\example\dockerhw21
+    container_name: cont-app
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/pic
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=yamaha170411
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    ports:
+    - 8079:8080
+
+  db:
+    image: 'image-db'
+    build:
+      context: C:\Users\Asus\HW21\docker-hw21\src\main\docker
+    container_name: cont-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=yamaha170411
+    ports:
+    - 5566:5432
